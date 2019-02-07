@@ -1,13 +1,16 @@
 const path = require('path');
-
+const webpack = require('webpack');
 module.exports = {
   resolve: {
     modules: [path.resolve('./lib'), path.resolve('./node_modules')]
   },
-  entry: ['@babel/polyfill', './lib/renderers/dom.js'],
+  entry: {
+    vendor: ['@babel/polyfill', 'react', 'react-dom', 'prop-types', 'axios'],
+    app: ['./lib/renderers/dom.js']
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
